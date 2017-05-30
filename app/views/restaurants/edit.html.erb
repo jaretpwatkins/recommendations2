@@ -42,7 +42,8 @@
           Neighborhood
         </label>
 
-        <input type="text" id="neighborhood" name="neighborhood" placeholder="Neighborhood" class="form-control" value="<%= @restaurant.neighborhood %>">
+        <%= select_tag(:neighborhood_id, options_from_collection_for_select(Neighborhood.all, :id, :name, @restaurant.neighborhood_id), :class => "form-control") %>
+        <!-- <input type="text" id="neighborhood" name="neighborhood" placeholder="Neighborhood" class="form-control" value="<%#= @restaurant.neighborhood %>"> -->
       </div>
 
       <!-- Label and input for image_url -->

@@ -1,6 +1,8 @@
 class RestaurantsController < ApplicationController
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.all.sort do |a, b|
+      b.recommendations.count <=> a.recommendations.count
+    end
 
     render("restaurants/index.html.erb")
   end
@@ -22,7 +24,7 @@ class RestaurantsController < ApplicationController
 
     @restaurant.name = params[:name]
     @restaurant.address = params[:address]
-    @restaurant.neighborhood = params[:neighborhood]
+    @restaurant.neighborhood_id = params[:neighborhood_id]
     @restaurant.image_url = params[:image_url]
     @restaurant.yelp_url = params[:yelp_url]
 

@@ -2,6 +2,10 @@ class RecommendationsController < ApplicationController
   def index
     @recommendations = Recommendation.all
 
+    @restaurants = Restaurant.all.sort do |a, b|
+      b.recommendations.count <=> a.recommendations.count
+    end
+
     render("recommendations/index.html.erb")
   end
 

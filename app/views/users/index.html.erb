@@ -18,7 +18,7 @@
       <% @users.each do |user| %>
       <tr>
         <td>
-<% if user.image == nil %>
+<% if user.image.blank? %>
 <img src="http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png" class="img-responsive" style="width:128px;height:128px;">
 
 <% else %>

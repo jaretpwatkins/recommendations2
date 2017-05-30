@@ -11,15 +11,22 @@
       <tr>
         <th>Image</th>
         <th>Restaurant</th>
-        <th>User</th>
+        <th>Recommenders</th>
       </tr>
 
-      <% @recommendations.each do |recommendation| %>
+      <% @restaurants.each do |restaurant| %>
+
+      <% if restaurant.recommendations.count >= 1 %>
       <tr>
-        <td><img src="<%= Restaurant.find_by({:id => recommendation.restaurant_id}).image_url%>" class="img-responsive"></td>
-        <td><%= link_to(Restaurant.find_by({:id => recommendation.restaurant_id}).name, Restaurant.find_by({:id => recommendation.restaurant_id}).yelp_url, :target => "_blank") %></td>
-        <td><a href="/users/<%= User.find_by({:id => recommendation.user_id}).id %>"><%= User.find_by({:id => recommendation.user_id}).username %></a></td>
+        <td><img src="<%= restaurant.image_url%>" class="img-responsive"></td>
+        <td><%= link_to(restaurant.name, restaurant.yelp_url, :target => "_blank") %></td>
+        <td>
+          <% restaurant.fans.each do |fan| %>
+          <a href="/users/<%=fan.id %>"><%= fan.username %></a><br />
+          <% end %>
+        </td>
       </tr>
+      <% end %>
       <% end %>
     </table>
   </div>

@@ -15,11 +15,11 @@
 
       <% @user.recommendations.each do |recommendation| %>
       <tr>
-        <td><img src="<%= Restaurant.find_by({:id => recommendation.restaurant_id}).image_url %>" class="img-responsive"</td>
-        <td><%= link_to(Restaurant.find_by({:id => recommendation.restaurant_id}).name, Restaurant.find_by({:id => recommendation.restaurant_id}).yelp_url, :target => "_blank") %></td>
-        <td><%= link_to(Restaurant.find_by({:id => recommendation.restaurant_id}).address, "https://www.google.com/maps/place/"+Restaurant.find_by({:id => recommendation.restaurant_id}).address.gsub(" ", "+"), :target => "_blank") %></td>
+        <td><img src="<%= recommendation.restaurant.image_url %>" class="img-responsive"</td>
+        <td><%= link_to(recommendation.restaurant.name, recommendation.restaurant.yelp_url, :target => "_blank") %></td>
+        <td><%= link_to(recommendation.restaurant.address, "https://www.google.com/maps/place/"+recommendation.restaurant.address.gsub(" ", "+"), :target => "_blank") %></td>
         <!-- <td><%#= Restaurant.find_by({:id => recommendation.restaurant_id}).address %></td> -->
-        <td><%= Restaurant.find_by({:id => recommendation.restaurant_id}).neighborhood %></td>
+        <td><a href="/neighborhoods/<%= recommendation.restaurant.neighborhood.id %>"><%= recommendation.restaurant.neighborhood.name %></a></td>
         <td>
           <a href="/recommendations/<%= recommendation.id %>" class="btn btn-primary">Show</a>
         </td>
